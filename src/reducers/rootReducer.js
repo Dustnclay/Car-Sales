@@ -10,7 +10,7 @@ const initialState = {
       image:
         'https://cdn.motor1.com/images/mgl/0AN2V/s1/2019-ford-mustang-bullitt.jpg',
       features: [
-        { id: 5, name: 'Spinners', price: 800 }
+        // { id: 5, name: 'Spinners', price: 800 }
       ]
     },
     additionalFeatures: [
@@ -25,10 +25,11 @@ export const rootReducer = (state = initialState, action) => {
     switch (action.type){
 
         case ADD_FEATURE:
-            console.log('add state',state.additionalFeatures)
+            console.log('state',state)
             console.log('add action.payload',action.payload)
             console.log('features', state.car.features)
             return {...state,
+                additionalPrice: state.additionalPrice+action.payload.price,
                 car: {...state.car,
                      features: [...state.car.features,
                          action.payload]},
@@ -39,6 +40,7 @@ export const rootReducer = (state = initialState, action) => {
             console.log('remove state',state)
             console.log('remove action.payload', action.payload)
             return {...state,
+                additionalPrice: state.additionalPrice-action.payload.price,
                     additionalFeatures: [...state.additionalFeatures,
                         action.payload],
                     car:{...state.car,
