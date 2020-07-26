@@ -38,12 +38,12 @@ export const rootReducer = (state = initialState, action) => {
         case REMOVE_FEATURE:
             console.log('remove state',state)
             console.log('remove action.payload', action.payload)
-            return (
-                {...state,
-                    car:{...state.car}
-                }
-            )
-
+            return {...state,
+                    additionalFeatures: [...state.additionalFeatures,
+                        action.payload],
+                    car:{...state.car,
+                        features: state.car.features.filter(obj => obj.id !== action.payload.id)}
+            }
     default: return state
 }}
 
